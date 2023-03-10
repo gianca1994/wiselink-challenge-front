@@ -15,6 +15,12 @@ const Navbar = () => {
             Events
           </Nav.Link>
         </Nav.Item>
+        <Nav.Item style={navbarItems}>
+          <Nav.Link href="/registered" style={navbarItemsLink}>
+            Events Registered
+          </Nav.Link>
+        </Nav.Item>
+
 
         <Nav.Item style={navbarItemsLogout}>
           <Nav.Link href="/" style={navbarItemsLink}>
