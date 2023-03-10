@@ -16,13 +16,12 @@ const Login = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     if (dataLogin.username === "" || dataLogin.password === "") return;
 
     const response = await postReq("auth/login", dataLogin);
-
     if (response.status === 200) {
       cookies.set("token", response.data.token, { path: "/" });
+      window.location.href = "/profile";
     }
   }
 
