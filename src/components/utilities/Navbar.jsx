@@ -11,7 +11,7 @@ const Navbar = () => {
           </Nav.Link>
         </Nav.Item>
         <Nav.Item style={navbarItems}>
-          <Nav.Link href="/taskbuilder" style={navbarItemsLink}>
+          <Nav.Link href="/events" style={navbarItemsLink}>
             Events
           </Nav.Link>
         </Nav.Item>

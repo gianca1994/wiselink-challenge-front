@@ -60,7 +60,7 @@ const Login = () => {
               value={dataLogin.password}
               onChange={handleChange}
             />
-            <button className="mt-2 ps-5 pe-5" type="submit">
+            <button className="btn btn-primary mt-4" type="submit">
               Sign in
             </button>
           </form>

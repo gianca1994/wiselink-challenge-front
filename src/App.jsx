@@ -5,6 +5,8 @@ import Navbar from "./components/utilities/Navbar";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Profile from "./components/user/Profile";
+import EventsList from "./components/event/EventsList";
+import EventDetails from "./components/event/EventDetails";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/events" element={<EventsList />} />
+          <Route path="/events/:id" element={<EventDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -20,35 +20,32 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>Profile</h1>
-      <h2>Username: {profile.username}</h2>
-      <h2>Email: {profile.email}</h2>
-      {profile.admin ? <h2>Role: Admin</h2> : <h2>Role: User</h2>}
+      <h1 style={h1}>Profile</h1>
+      <h2 style={h2}>Username: {profile.username}</h2>
+      <h2 style={h2}>Email: {profile.email}</h2>
+      {profile.admin ? <h2 style={h2}>Role: Admin</h2> : <h2 style={h2}>Role: User</h2>}
 
-      <h1>Events</h1>
+      <h1 style={h1}>Events</h1>
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",           
+          alignItems: "center",
           fontSize: "30px",
         }}
       >
         {profile.events && (
-          <Table striped bordered hover style={{
-            textAlign: "center",
-          }}>
+          <Table striped bordered hover style={table}>
             <thead>
               <tr>
                 <th>#</th>
                 <th>Title</th>
                 <th>Short Desc</th>
-                <th>Long Desc</th>
                 <th>Date</th>
                 <th>Time</th>
-                <th>Organizer</th>
                 <th>Place</th>
                 <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
             {profile.events?.map((event, index) => (
@@ -57,12 +54,20 @@ const Profile = () => {
                   <td>{event.id}</td>
                   <td>{event.title}</td>
                   <td>{event.short_desc}</td>
-                  <td>{event.long_desc}</td>
                   <td>{event.date}</td>
                   <td>{event.time}</td>
-                  <td>{event.organizer}</td>
                   <td>{event.place}</td>
                   <td>{event.status}</td>
+                  <td>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => {
+                        window.location.href = "/events/" + event.id;
+                      }}
+                    >
+                      View
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             ))}
@@ -74,3 +79,22 @@ const Profile = () => {
 };
 
 export default Profile;
+
+const h1 = {
+  textAlign: "center",
+  fontSize: "50px",
+  marginTop: "15px",
+  marginBottom: "15px",
+};
+
+const h2 = {
+  textAlign: "center",
+  fontSize: "30px",
+  marginTop: "15px",
+};
+
+const table = {
+  textAlign: "center",
+  fontSize: "25px",
+  width: "80%",
+};
