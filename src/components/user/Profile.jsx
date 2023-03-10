@@ -30,12 +30,14 @@ const Profile = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center",           
           fontSize: "30px",
         }}
       >
         {profile.events && (
-          <Table striped bordered hover>
+          <Table striped bordered hover style={{
+            textAlign: "center",
+          }}>
             <thead>
               <tr>
                 <th>#</th>
