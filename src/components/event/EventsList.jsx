@@ -27,12 +27,11 @@ const EventsList = () => {
             <th>#</th>
             <th>Title</th>
             <th>Short Desc</th>
-            <th>Long Desc</th>
             <th>Date</th>
             <th>Time</th>
-            <th>Organizer</th>
             <th>Place</th>
             <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -42,12 +41,20 @@ const EventsList = () => {
                 <td>{event.id}</td>
                 <td>{event.title}</td>
                 <td>{event.short_desc}</td>
-                <td>{event.long_desc}</td>
                 <td>{event.date}</td>
                 <td>{event.time}</td>
-                <td>{event.organizer}</td>
                 <td>{event.place}</td>
                 <td>{event.status}</td>
+                <td>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      window.location.href = "/events/" + event.id;
+                    }}
+                  >
+                    View
+                  </button>
+                </td>
               </tr>
             ))}
         </tbody>
