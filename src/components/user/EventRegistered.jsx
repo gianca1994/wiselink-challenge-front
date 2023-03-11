@@ -7,8 +7,8 @@ import { headers } from "../../components/utilities/Utilities";
 const EventRegistered = () => {
   const [events, setEvents] = useState([]);
 
-  async function getEventsRegistered() {
-    const response = await getReq("users/registered-events", headers);
+  async function getEventsRegistered(filter) {
+    const response = await getReq("users/registered-events?filter=" + filter, headers);
     if (response.status === 200) {
       setEvents(response.data);
     }
@@ -21,6 +21,35 @@ const EventRegistered = () => {
   return (
     <div style={eventsListStyle}>
       <h1 style={h1}>Events Registered</h1>
+      <h2 style={h2}>Filters: </h2>
+      <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "20px"}}>
+        <button
+          className="btn btn-success"
+          style={{marginRight: "10px"}}
+          onClick={() => {
+            getEventsRegistered("all");
+          }}
+        >
+          All
+        </button>
+        <button
+          className="btn btn-primary"
+          style={{marginRight: "10px"}}
+          onClick={() => {
+            getEventsRegistered("active");
+          }}
+        >
+          active
+        </button>
+        <button
+          className="btn btn-info"
+          onClick={() => {
+            getEventsRegistered("completed");
+          }}
+        >
+          completed
+        </button>
+      </div>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -66,16 +95,16 @@ const EventRegistered = () => {
 export default EventRegistered;
 
 const eventsListStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "50px",
-    padding: "20px",
-    borderRadius: "10px",
-    fontSize: "35px",
-    textAlign: "center",
-  };
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  margin: "50px",
+  padding: "20px",
+  borderRadius: "10px",
+  fontSize: "35px",
+  textAlign: "center",
+};
 
 const h1 = {
   textAlign: "center",
