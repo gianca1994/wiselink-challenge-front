@@ -42,3 +42,17 @@ export async function deleteReq(route, headers) {
     }
   }
 }
+
+export async function patchReq(route, objectData, headers) {
+  try {
+    const data = objectData ? objectData : {};
+    const config = headers ? { headers } : {};
+    const response = await axios.patch(API_URL + route, data, config);
+
+    if (response.status === 200) return response;
+  } catch (err) {
+    if (err.request.status !== 0) {
+      notify(err.response.data.message);
+    }
+  }
+}

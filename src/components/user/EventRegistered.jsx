@@ -102,7 +102,7 @@ const eventsListStyle = {
   margin: "50px",
   padding: "20px",
   borderRadius: "10px",
-  fontSize: "35px",
+  fontSize: "20px",
   textAlign: "center",
 };
 
