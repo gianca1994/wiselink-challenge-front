@@ -7,20 +7,57 @@ import { headers } from "../../components/utilities/Utilities";
 const EventsList = () => {
   const [events, setEvents] = useState([]);
 
-  async function getEvents() {
-    const response = await getReq("events/", headers);
+  async function getEvents(filter) {
+    const response = await getReq("events" + filter, headers);
     if (response.status === 200) {
       setEvents(response.data);
     }
   }
 
   useEffect(() => {
-    getEvents();
+    getEvents("?filter=all");
   }, []);
 
   return (
     <div style={eventsListStyle}>
       <h1>Events List</h1>
+      <h2>Filters: </h2>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "20px" }}>
+        <button
+          className="btn btn-success"
+          style={{ marginRight: "10px" }}
+          onClick={() => {
+            getEvents("?filter=all");
+          }}
+        >
+          All
+        </button>
+        <button
+          className="btn btn-primary"
+          style={{ marginRight: "10px" }}
+          onClick={() => {
+            getEvents("?status=active");
+          }}
+        >
+          Active
+        </button>
+
+        <input
+          type="date"
+          style={{ marginRight: "10px" }}
+          onChange={(e) => {
+            getEvents("?date=" + e.target.value);
+          }}
+        />
+        <label style={{ marginRight: "10px" }}>Title: </label>
+        <input
+          type="text"
+          style={{ marginRight: "10px" }}
+          onChange={(e) => {
+            getEvents("?title=" + e.target.value);
+          }}
+        />
+      </div>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -73,6 +110,6 @@ const eventsListStyle = {
   margin: "50px",
   padding: "20px",
   borderRadius: "10px",
-  fontSize: "35px",
+  fontSize: "25px",
   textAlign: "center",
 };
