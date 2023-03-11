@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { ToastContainer } from "react-toastify";
 
-import { getReq, postReq } from "../../components/utilities/RequestApi";
+import { deleteReq, getReq, postReq } from "../../components/utilities/RequestApi";
 import { headers, notify } from "../../components/utilities/Utilities";
 
 const EventsList = () => {
@@ -24,6 +24,14 @@ const EventsList = () => {
     } else {
       notify(response.data);
     }
+  }
+
+  async function deleteEvent(eventId) {
+    const response = await deleteReq("events/" + eventId, headers);
+
+    if (response.status === 200) {
+      window.location.reload();
+    } 
   }
 
   useEffect(() => {
@@ -111,6 +119,15 @@ const EventsList = () => {
                     }}
                   >
                     Register
+                  </Button>
+                  <Button
+                    variant="danger"
+                    style={{ marginLeft: "10px" }}
+                    onClick={() => {
+                      deleteEvent(event.id);
+                    }}
+                  >
+                    Delete
                   </Button>
                 </td>
               </tr>
