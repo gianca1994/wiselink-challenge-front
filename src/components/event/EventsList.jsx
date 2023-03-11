@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import { ToastContainer } from "react-toastify";
 
-import { getReq } from "../../components/utilities/RequestApi";
-import { headers } from "../../components/utilities/Utilities";
+import { getReq, postReq } from "../../components/utilities/RequestApi";
+import { headers, notify } from "../../components/utilities/Utilities";
 
 const EventsList = () => {
   const [events, setEvents] = useState([]);
@@ -11,6 +13,16 @@ const EventsList = () => {
     const response = await getReq("events" + filter, headers);
     if (response.status === 200) {
       setEvents(response.data);
+    }
+  }
+
+  async function registerEvent(eventId) {
+    const response = await postReq("users/register-event/" + eventId, {}, headers);
+
+    if (response.data === "Registered to event") {
+      window.location.href = "/registered";
+    } else {
+      notify(response.data);
     }
   }
 
@@ -91,11 +103,31 @@ const EventsList = () => {
                   >
                     View
                   </button>
+                  <Button
+                    variant="info"
+                    style={{ marginLeft: "10px" }}
+                    onClick={() => {
+                      registerEvent(event.id);
+                    }}
+                  >
+                    Register
+                  </Button>
                 </td>
               </tr>
             ))}
         </tbody>
       </Table>
+      <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
     </div>
   );
 };
