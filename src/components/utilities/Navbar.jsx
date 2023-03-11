@@ -1,6 +1,8 @@
 import React from "react";
 import Nav from "react-bootstrap/Nav";
 
+import { cookies } from "./Utilities";
+
 const Navbar = () => {
   return (
     <div>
@@ -20,7 +22,13 @@ const Navbar = () => {
             Events Registered
           </Nav.Link>
         </Nav.Item>
-
+        {cookies.get("admin") === "true" && (
+          <Nav.Item style={navbarItems}>
+            <Nav.Link href="/create" style={navbarItemsLink}>
+              Register Event
+            </Nav.Link>
+          </Nav.Item>
+        )}
 
         <Nav.Item style={navbarItemsLogout}>
           <Nav.Link href="/" style={navbarItemsLink}>
@@ -35,21 +43,21 @@ const Navbar = () => {
 export default Navbar;
 
 const navbar = {
-  backgroundColor: "lightblue",
+  backgroundColor: "black",
   display: "flex",
   alignItems: "center",
   height: "70px",
-  fontSize: "30px",
+  fontSize: "20px",
   fontWeight: "bold",
-  color: "#000",
 };
 
 const navbarItems = {
-  marginLeft: "40px",
+  marginLeft: "20px",
 };
 
 const navbarItemsLink = {
   textDecoration: "none",
+  color: "#f5f5f5",
 };
 
 const navbarItemsLogout = {

@@ -8,6 +8,7 @@ import Profile from "./components/user/Profile";
 import EventsList from "./components/event/EventsList";
 import EventDetails from "./components/event/EventDetails";
 import EventRegistered from "./components/user/EventRegistered";
+import Create from "./components/event/Create";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/registered" element={<EventRegistered />} />
           <Route path="/events" element={<EventsList />} />
           <Route path="/events/:id" element={<EventDetails />} />
+          <Route path="/create" element={<Create />} />
         </Routes>
       </BrowserRouter>
     </div>

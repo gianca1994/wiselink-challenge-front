@@ -14,21 +14,13 @@ const Register = () => {
   });
 
   function handleChange(e) {
-    const { target } = e;
-    const { name, value } = target;
-
-    const newValues = {
-      ...values,
-      [name]: value,
-    };
-
-    setValues(newValues);
+    setValues({ ...values, [e.target.name]: e.target.value });
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (!Object.values(values).every(Boolean)) return;
-    
+
     const response = await postReq("auth/register", values);
     if (response.status === 200) {
       notifySuccess("/", "User created successfully!", "Username: " + values.username);
@@ -37,46 +29,51 @@ const Register = () => {
 
   return (
     <div>
-      <section>
-        <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit}>
-          <h2 className="mt-4">Username</h2>
-          <input
-            type="text"
-            id="username"
-            className="form-control mt-1"
-            name="username"
-            value={values.username}
-            onChange={handleChange}
-          />
-          <h2 className="mt-2">Email</h2>
-          <input
-            type="email"
-            id="email"
-            className="form-control mt-1"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-          />
-          <h2 className="mt-2">Password</h2>
-          <input
-            type="password"
-            id="password"
-            className="form-control mt-1"
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-          />
+      <section style={sectionStyle}>
+        <form onSubmit={handleSubmit} style={formStyle}>
+          <h1>Sign Up</h1>
+          <div style={divStyle}>
+            <h5 className="mt-2">Username</h5>
+            <input
+              type="text"
+              id="username"
+              className="form-control mt-1"
+              name="username"
+              value={values.username}
+              onChange={handleChange}
+            />
+          </div>
+          <div style={divStyle}>
+            <h5 className="mt-2">Email</h5>
+            <input
+              type="email"
+              id="email"
+              className="form-control mt-1"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+            />
+          </div>
 
-          <button type="submit">
+          <div style={divStyle}>
+            <h5 className="mt-2">Password</h5>
+            <input
+              type="password"
+              id="password"
+              className="form-control mt-1"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary mt-2">
             Sign up
           </button>
 
-          <div>
+          <div className="login--footer mt-2">
             <p>Are you already registered?</p>
-            <a href="/">
-              Login
-            </a>
+            <a href="/">Login</a>
           </div>
         </form>
       </section>
@@ -97,3 +94,25 @@ const Register = () => {
 };
 
 export default Register;
+
+const sectionStyle = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+  marginTop: "2%",
+};
+
+const formStyle = {
+  display: "flex",
+  flexDirection: "column",
+  border: "1px solid black",
+  padding: "25px 40px",
+};
+
+const divStyle = {
+  display: "flex",
+  flexDirection: "column",
+  margin: "15px 0",
+};
